@@ -5,5 +5,6 @@ public class Main {
         AddressBook book1 = new AddressBook();
         book1.addContact();
         book1.listContacts();
+        book1.editContact("vedant", "singh");
     }
 }

@@ -72,5 +72,81 @@ public class AddressBook {
         }
     }
 
+    // Search Contact by name
+    private Integer findContactByName(String firstName, String lastName) {
+        for (Map.Entry<Integer, Contact> entry : contacts.entrySet()) {
+            Contact contact = entry.getValue();
+            if (contact.getFirstName().equalsIgnoreCase(firstName) && contact.getLastName().equalsIgnoreCase(lastName)) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
+    // Edit contact Details
+    public void editContact(String firstName, String lastName) {
+        Integer contactKey = findContactByName(firstName, lastName);
+        if (contactKey == null) {
+            System.out.println("Contact not found.");
+            return;
+        }
+
+        Contact contact = contacts.get(contactKey);
+
+        System.out.println("Editing Contact: " + contact);
+        System.out.println("Enter new details (press Enter to skip):");
+
+        System.out.print("First Name [" + contact.getFirstName() + "]: ");
+        String newFirstName = scanner.nextLine();
+        if (!newFirstName.isEmpty()) {
+            contact.setFirstName(newFirstName);
+        }
+
+        System.out.print("Last Name [" + contact.getLastName() + "]: ");
+        String newLastName = scanner.nextLine();
+        if (!newLastName.isEmpty()) {
+            contact.setLastName(newLastName);
+        }
+
+        System.out.print("Address [" + contact.getAddress() + "]: ");
+        String newAddress = scanner.nextLine();
+        if (!newAddress.isEmpty()) {
+            contact.setAddress(newAddress);
+        }
+
+        System.out.print("City [" + contact.getCity() + "]: ");
+        String newCity = scanner.nextLine();
+        if (!newCity.isEmpty()) {
+            contact.setCity(newCity);
+        }
+
+        System.out.print("State [" + contact.getState() + "]: ");
+        String newState = scanner.nextLine();
+        if (!newState.isEmpty()) {
+            contact.setState(newState);
+        }
+
+        System.out.print("Zip Code [" + contact.getZip() + "]: ");
+        String newZip = scanner.nextLine();
+        if (!newZip.isEmpty()) {
+            contact.setZip(newZip);
+        }
+
+        System.out.print("Phone Number [" + contact.getPhoneNumber() + "]: ");
+        String newPhoneNumber = scanner.nextLine();
+        if (!newPhoneNumber.isEmpty()) {
+            contact.setPhoneNumber(newPhoneNumber);
+        }
+
+        System.out.print("Email [" + contact.getEmail() + "]: ");
+        String newEmail = scanner.nextLine();
+        if (!newEmail.isEmpty()) {
+            contact.setEmail(newEmail);
+        }
+        System.out.println();
+
+        contacts.put(contactKey, contact);
+        System.out.println("Contact updated successfully.");
+    }
 }
 

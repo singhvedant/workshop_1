@@ -6,5 +6,7 @@ public class Main {
         book1.addContact();
         book1.listContacts();
         book1.editContact("vedant", "singh");
+        System.out.println();
+        book1.deleteContact("vedant", "singh");
     }
 }

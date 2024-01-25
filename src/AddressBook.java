@@ -148,5 +148,19 @@ public class AddressBook {
         contacts.put(contactKey, contact);
         System.out.println("Contact updated successfully.");
     }
+
+    // delete contact by Name
+    public void deleteContact(String firstName, String lastName) {
+        Integer contactKey = findContactByName(firstName, lastName);
+        if (contactKey == null) {
+            System.out.println("Contact not found.");
+            return;
+        }
+
+        Contact contact = contacts.get(contactKey);
+        System.out.println("Deleting Contact: " + contact);
+        contacts.remove(contactKey);
+        System.out.println("Contact deleted successfully.");
+    }
 }
 

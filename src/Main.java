@@ -1,8 +1,8 @@
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to AddressBook Program.");
         AddressBooks app = new AddressBooks();
@@ -38,6 +38,7 @@ public class Main {
                         book.removeContact(contactId);
                         break;
                     case "3":
+                        System.out.println("All Contacts: ");
                         book.listContacts();
                         break;
                     case "4":
@@ -63,8 +64,7 @@ public class Main {
                             app.removeBook(bookName1);
                             input = "6";
                             System.out.println("Book deleted : " + bookName);
-                        }
-                        else {
+                        } else {
                             System.out.println("Book not deleted.");
                         }
                         break;

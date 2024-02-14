@@ -25,12 +25,14 @@ public class Main {
                 System.out.println("5. Delete a contact");
                 System.out.println("6. Exit the book");
                 System.out.println("7. Delete the book");
+                System.out.println("8. Save and Exit");
+                System.out.println("9. Exit the program");
                 System.out.print("Enter a command: ");
                 input = scanner.nextLine();
 
                 switch (input) {
                     case "1":
-                        book.addContact();
+                        book.addContact(bookName);
                         break;
                     case "2":
                         System.out.print("Enter Contact ID: ");
@@ -46,7 +48,7 @@ public class Main {
                         String firstName = scanner.nextLine();
                         System.out.print("Enter Last Name: ");
                         String lastName = scanner.nextLine();
-                        book.editContact(firstName, lastName);
+                        book.editContact(firstName, lastName, bookName);
                         break;
                     case "5":
                         System.out.print("Enter First Name: ");
@@ -68,6 +70,11 @@ public class Main {
                             System.out.println("Book not deleted.");
                         }
                         break;
+                    case "8":
+                        app.saveAndExit();
+                        break;
+                    case "9":
+                        System.exit(0);
                     default:
                         System.out.println("Invalid command.");
                         break;

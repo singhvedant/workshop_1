@@ -123,6 +123,27 @@ public class Contact {
         System.out.println("Contact updated successfully.");
     }
 
+
+    public boolean save(Contact contact, String bookName) {
+        try  {
+            Path path = Paths.get("contacts/"+bookName+"/");
+            if (!Files.exists(path)) {
+                try {
+                    Files.createDirectories(path);
+                } catch (IOException e) {
+                    e.fillInStackTrace();
+                }
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path+"/"+contact.getFirstName()+contact.getLastName()+".txt"));
+            writer.write(contact.toString());
+            writer.close();
+            return true;
+        } catch (IOException e) {
+            e.fillInStackTrace();
+            return false;
+        }
+    }
+
     @Override
     public String toString() {
         return "First Name\t" + firstName + '\n' +
@@ -134,5 +155,4 @@ public class Contact {
                 "PhoneNumber\t" + phoneNumber + '\n' +
                 "Email\t\t" + email;
     }
-
 }

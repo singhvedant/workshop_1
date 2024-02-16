@@ -38,6 +38,19 @@ public class Contact {
     public String getLastName() {
         return lastName;
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
     private void createContact() throws InputMismatchException {
         System.out.println("Enter Contact Details:");
 
@@ -124,23 +137,38 @@ public class Contact {
     }
 
 
-    public boolean save(Contact contact, String bookName) {
-        try  {
-            Path path = Paths.get("contacts/"+bookName+"/");
-            if (!Files.exists(path)) {
-                try {
-                    Files.createDirectories(path);
-                } catch (IOException e) {
-                    e.fillInStackTrace();
-                }
-            }
-            BufferedWriter writer = new BufferedWriter(new FileWriter(path+"/"+contact.getFirstName()+contact.getLastName()+".txt"));
-            writer.write(contact.toString());
-            writer.close();
-            return true;
-        } catch (IOException e) {
-            e.fillInStackTrace();
-            return false;
+    public boolean saveNewContact(Contact contact, String bookName) {
+//        try  {
+//            Path path = Paths.get("contacts/"+bookName+"/");
+//            if (!Files.exists(path)) {
+//                try {
+//                    Files.createDirectories(path);
+//                } catch (IOException e) {
+//                    e.fillInStackTrace();
+//                }
+//            }
+//            BufferedWriter writer = new BufferedWriter(new FileWriter(path+"/"+contact.getFirstName()+contact.getLastName()+".txt"));
+//            writer.write(contact.toString());
+//            writer.close();
+//            return true;
+//        } catch (IOException e) {
+//            e.fillInStackTrace();
+//            return false;
+//        }
+
+        AddressBookManager manager = new AddressBookManager();
+        return manager.insertContact(contact, bookName);
+    }
+    public boolean editContact(Contact value, String folderName) {
+        return false;
+    }
+    public boolean save(Contact contact, String folderName) {
+        AddressBookManager manager = new AddressBookManager();
+        boolean contactAlreadyExist = manager.checkContactExist(contact, folderName);
+        if (contactAlreadyExist) {
+            return saveNewContact(contact, folderName);
+        } else {
+            return editContact(contact, folderName);
         }
     }
 

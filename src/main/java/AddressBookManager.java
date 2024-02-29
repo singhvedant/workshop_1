@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class AddressBookManager {
     private String jdbcURL = "jdbc:mysql://localhost:3306/AddressBookDB";
@@ -53,9 +50,6 @@ public class AddressBookManager {
             printSQLException(e);
             return false;
         }
-    }
-    public boolean checkContactExist(Contact contact, String folderName) {
-        return false;
     }
     private void printSQLException(SQLException ex) {
         for (Throwable e : ex) {

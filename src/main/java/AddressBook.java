@@ -1,10 +1,14 @@
 import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Map;
 
 public class AddressBook {
     private final HashMap<String, Contact> contacts;
 
+    public int numberOfContacts() {
+        return contacts.values().size();
+    }
     public AddressBook() {
         this.contacts = new HashMap<>();
     }
@@ -15,9 +19,9 @@ public class AddressBook {
             Contact contact = new Contact();
             contacts.put(bookName, contact);
             System.out.println("Contact added successfully.");
-            if (contact.save(contact, bookName)) {
-                System.out.println("Successfully saved");
-            }
+//            if (contact.save(contact, bookName)) {
+//                System.out.println("Successfully saved");
+//            }
         } catch (IllegalArgumentException | InputMismatchException e) {
             System.out.println(e.getMessage());
             System.out.println("Contact creation suspended.");
@@ -32,7 +36,9 @@ public class AddressBook {
     // List all contacts
     public void listContacts() {
         for (Map.Entry<String, Contact> entry : contacts.entrySet()) {
-            System.out.println("ContactID: " + entry.getKey() + ", Contact: " + entry.getValue());
+            System.out.println("--------------------------------");
+            System.out.println("\nContactID: " + entry.getKey() + ",\n Contact: " + entry.getValue());
+            System.out.println("--------------------------------");
         }
     }
 
@@ -47,6 +53,10 @@ public class AddressBook {
         return null;
     }
 
+    public List<Contact> findContactsByCity(String city) {
+        return contacts.values().stream().filter(contact -> contact.getCity().equalsIgnoreCase(city)).toList();
+    }
+
     // Edit contact Details
     public void editContact(String firstName, String lastName, String bookName) {
         String contactKey = findContactByName(firstName, lastName);
@@ -55,13 +65,14 @@ public class AddressBook {
             return;
         }
         Contact contact = contacts.get(contactKey);
-        try {
-            contact.editContact();
-            contact.save(contact, bookName);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Contact editing suspended.");
-        }
+        contact.editContact();
+//        try {
+//            contact.editContact();
+//            contact.save(contact, bookName);
+//        } catch (IllegalArgumentException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println("Contact editing suspended.");
+//        }
     }
 
     // delete contact by Name
@@ -78,13 +89,13 @@ public class AddressBook {
     }
 
     public void saveAllContacts(String folderName) {
-        for (Map.Entry<String, Contact> entry : contacts.entrySet()) {
-            Contact contact = entry.getValue();
-            if (!contact.save(entry.getValue(), folderName)) {
-                System.out.println("Failed: \n" + contact);
-            }
-        }
-        System.out.println("Saving process completed.");
+//        for (Map.Entry<String, Contact> entry : contacts.entrySet()) {
+//            Contact contact = entry.getValue();
+//            if (!contact.save(entry.getValue(), folderName)) {
+//                System.out.println("Failed: \n" + contact);
+//            }
+//        }
+        System.out.println("Saving process stopped.");
     }
 }
 

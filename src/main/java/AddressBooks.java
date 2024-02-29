@@ -1,5 +1,7 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AddressBooks {
@@ -40,6 +42,21 @@ public class AddressBooks {
         }
     }
 
+    public void printContactsByCity(String city) {
+        List<Contact> matchingContacts = new ArrayList<>();
+        for (Map.Entry<String, AddressBook> entry : books.entrySet()) {
+            AddressBook addressBook = entry.getValue();
+            matchingContacts.addAll(addressBook.findContactsByCity(city)) ;
+        }
+        if (matchingContacts.isEmpty()) {
+            System.out.println("No contacts found in the city!");
+        } else {
+            System.out.println("Contacts in the city: ");
+            for (Contact contact : matchingContacts) {
+                System.out.println(contact);
+            }
+        }
+    }
     public void deleteBook(String bookName) {
         AddressBook addressBook = books.get(bookName);
         if (addressBook == null) {
